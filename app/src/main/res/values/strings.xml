@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">FinalApp</string>
+
+    <!-- Login View -->
+    <string name="login_email">Correo</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_confirm_password">Confirma Contraseña</string>
+    <string name="login_sign_in">Sign In</string>
+    <string name="login_sign_up">Sign Up</string>
+    <string name="login_reset_password">Recuperar mi contraseña</string>
+    <string name="login_sign_in_google">Sign In with Google</string>
+    <string name="login_forgot_password">Perdí mi contraseña</string>
+    <string name="login_create_account">Crear una nueva cuenta</string>
+    <string name="login_go_login">Regresar al Login</string>
+
+    <string name="open_drawer">Barra laterial Abierta</string>
+    <string name="close_drawer">Barra lateral cerrada</string>
+
+    <string name="recordatorios_fragment_string">Recordatorios</string>
+    <string name="perfil_fragment_string">Perfil</string>
+    <string name="nocturno_fragment_string">Modo Nocturno</string>
+    <string name="niveles_fragment_string">Niveles</string>
+    <string name="insulina_fragment_string">Niveles</string>
+    <string name="medicamento_fragment_string">Medicamento</string>
+    <string name="home_fragment_string">Inicio</string>
+    <string name="alimentos_fragment_string">Alimentos</string>
+    <string name="alertar_fragment_string">Alertar</string>
+    <string name="options_menu_log_out">Cerrar Sesion</string>
+
+    <string name="datos_info_string">Datos de usuario</string>
+    <string name="info_no_name">Perfil</string>
+
+    <string name="dialog_title">Modifica tus datos</string>
+    <string name="nombre_label">Nombre(s)</string>
+    <string name="apellidos_label">Apellidos</string>
+    <string name="edad_label">Edad</string>
+    <string name="altura_label">Altura</string>
+    <string name="peso_label">Peso</string>
+    <string name="dialog_edit_text_hint">Completa los campos</string>
+    <string name="dialog_ok">Listo</string>
+    <string name="dialog_cancel">Cancelar</string>
+
+    <string name="cal_label">Cal</string>
+    <string name="alimentos_seleccion_label">Ver selección</string>
+    <string name="ingresa_nivel_glucosa_label">Ingresa tu nivel de glucosa</string>
+    <string name="ingresa_nivel_insulina_label">Ingresa la insulina administrada</string>
+    <string name="registro_medicacion_label">Registrar Medicación</string>
+    <string name="tipo_medicamento_label">Tipo de medicamento</string>
+    <string name="nivel_glucosa_label">Nivel de glucosa</string>
+    <string name="nivel_insulina_label">Insulina administrada</string>
+    <string name="nombre_medicamento_label">Nombre del medicamento</string>
+    <string name="dosis_ingerida_label">Dosis Ingerida</string>
+    <string name="temp_hum">Registro Temperatura/Humedad</string>
+    <string name="ver_lista_label">Ver gráfica</string>
+    <string name="guardar_nivel_label">Guardar Nivel</string>
+    <string name="registrar_label">Registrar</string>
+    <string name="guardar_label">Guardar</string>
+    <string name="mgdl_label">Mg/dl</string>
+    <string name="ml_label">ml</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Llamada">Llamar</string>
+    <string name="Mensaje">SMS</string>
+    <string name="seleccion_contacto_button">+</string>
+    <string name="nombre_llamada_label">Nombre de contacto</string>
+    <string name="numero_llamada_label">Número Teléfonico</string>
+    <string name="contactos_emergencia_label">Contactos de emergencia</string>
+
+    <string-array name="tipo_medicamento">
+        <item>Pastilla</item>
+        <item>Bebible</item>
+        <item>Inyectado</item>
+    </string-array>
+    <string name="title_activity_graficos">GraficosActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+</resources>
+
+
+

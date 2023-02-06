@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AlertarFragment">
+    <TextView
+        android:id="@+id/textViewTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/contactos_emergencia_label"
+        android:textAlignment="center"
+        android:layout_marginTop="35dp"
+        android:textSize="25sp"
+        android:textColor="@color/colorTextBlack"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewLlamada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageViewPerfil"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_call"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/textViewNombreLlamada"
+                android:layout_width="200dp"
+                android:layout_marginStart="15dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorTextBlack"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre_llamada_label"
+                app:layout_constraintTop_toTopOf="@id/imageViewPerfil"
+                app:layout_constraintLeft_toRightOf="@id/imageViewPerfil"/>
+            <TextView
+                android:id="@+id/textViewNumero"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/numero_llamada_label"
+                app:layout_constraintBottom_toBottomOf="@id/imageViewPerfil"
+                app:layout_constraintLeft_toRightOf="@id/imageViewPerfil"/>
+
+            <ImageView
+                android:id="@+id/imageViewEditar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewNombreLlamada"
+                app:layout_constraintBottom_toBottomOf="@id/textViewNumero"
+                app:layout_constraintLeft_toRightOf="@id/textViewNombreLlamada"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewMensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardViewLlamada">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imageViewMensaje"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_message"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/textViewNombreMensaje"
+                android:layout_width="200dp"
+                android:layout_marginStart="15dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorTextBlack"
+                android:layout_height="wrap_content"
+                android:text="@string/nombre_llamada_label"
+                app:layout_constraintTop_toTopOf="@id/imageViewMensaje"
+                app:layout_constraintLeft_toRightOf="@id/imageViewMensaje"/>
+            <TextView
+                android:id="@+id/textViewNumero2"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/numero_llamada_label"
+                app:layout_constraintBottom_toBottomOf="@id/imageViewMensaje"
+                app:layout_constraintLeft_toRightOf="@id/imageViewMensaje"/>
+
+            <ImageView
+                android:id="@+id/imageViewEditar2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="7dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewNombreMensaje"
+                app:layout_constraintBottom_toBottomOf="@id/textViewNumero2"
+                app:layout_constraintLeft_toRightOf="@id/textViewNombreMensaje"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

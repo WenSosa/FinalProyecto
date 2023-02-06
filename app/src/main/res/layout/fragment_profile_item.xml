@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:text="@string/nombre_label"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewReciveNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/datos_text_size"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
+
+            <View
+                android:id="@+id/viewDivider1"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorDivider"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintLeft_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewReciveNombre" />
+
+            <TextView
+                android:id="@+id/textViewApellido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:text="@string/apellidos_label"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/viewDivider1" />
+
+            <TextView
+                android:id="@+id/textViewReciveApelldos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/datos_text_size"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewApellido" />
+
+            <View
+                android:id="@+id/viewDivider2"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorDivider"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintLeft_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewReciveApelldos" />
+
+            <TextView
+                android:id="@+id/textViewEdad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:text="@string/edad_label"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/viewDivider2" />
+
+            <TextView
+                android:id="@+id/textViewReciveEdad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/datos_text_size"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewEdad" />
+
+            <View
+                android:id="@+id/viewDivider3"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorDivider"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintLeft_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewReciveEdad" />
+
+            <TextView
+                android:id="@+id/textViewAltura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:text="@string/altura_label"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/viewDivider3" />
+
+            <TextView
+                android:id="@+id/textViewReciveAltura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/datos_text_size"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewAltura" />
+
+
+            <View
+                android:id="@+id/viewDivider4"
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/colorDivider"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintLeft_toRightOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewReciveAltura" />
+
+            <TextView
+                android:id="@+id/textViewPeso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="12dp"
+                android:text="@string/peso_label"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toTopOf="@+id/viewDivider4" />
+
+            <TextView
+                android:id="@+id/textViewRecivePeso"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:padding="10dp"
+                android:textColor="@color/colorTextBlack"
+                android:textSize="@dimen/datos_text_size"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintStart_toStartOf="parent"
+                card_view:layout_constraintTop_toBottomOf="@+id/textViewPeso" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

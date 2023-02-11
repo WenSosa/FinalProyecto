@@ -16,11 +16,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import com.andrea.finalproyectott.R
+import com.andrea.finalproyectott.adapters.InsulinaAdapter
 import com.andrea.finalproyectott.app.preferences
 import com.andrea.finalproyectott.databinding.FragmentAlertarBinding
+import com.andrea.finalproyectott.models.Contacto
+import com.andrea.finalproyectott.models.Insulina
+import com.andrea.finalproyectott.toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AlertarFragment : Fragment() {
+
+
+    private val store : FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var contactoDBRef: CollectionReference
+    private lateinit var contactoDBRef2: CollectionReference
+
+    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var currentUser: FirebaseUser
 
 
     var CODE = 0
@@ -36,11 +52,22 @@ class AlertarFragment : Fragment() {
         _binding = FragmentAlertarBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        setUpInsulinaDB()
+        setUpCurrentUser()
 
         setUpLlamadaBtn()
         setUpMensajeBtn()
 
         return view
+    }
+
+    fun setUpInsulinaDB(){
+        contactoDBRef =store.collection("Contacto-Llamada")
+        contactoDBRef2 =store.collection("Contacto-Mensaje")
+    }
+
+    fun setUpCurrentUser(){
+        currentUser = mAuth.currentUser!!
     }
 
     private fun setUpMensajeBtn() {
@@ -96,18 +123,42 @@ class AlertarFragment : Fragment() {
         if (CODE==1){
             binding.textViewNombreMensaje.text = getName(contactUri)
             binding.textViewNumero2.text = getPhone(contactUri)
-            //Aqui guardamos las Shared Preferences
-            //preferences.nombreMensaje = getName(contactUri) as String
-            //preferences.numeroMensaje = getPhone(contactUri) as String
+            var contactoMensaje = Contacto(currentUser.uid,getPhone(contactUri) as String,getName(contactUri) as String)
+            saveContactoM(contactoMensaje)
         }else if (CODE==2){
-            Log.d("HELP","Muere5-2")
             binding.textViewNombreLlamada.text = getName(contactUri)
-            Log.d("HELP","Muere5-3")
             binding.textViewNumero.text = getPhone(contactUri)
-            //Aqui guardamos las Shared Preferences
-            //preferences.nombreLlamada = getName(contactUri) as String
-            //preferences.numeroLlamada = getPhone(contactUri) as String
+            var contactoLlamada = Contacto(Userid=currentUser.uid,getPhone(contactUri) as String,getName(contactUri) as String)
+            saveContactoLl(contactoLlamada)
         }
+    }
+
+    private fun saveContactoM(contacto: Contacto){
+        val newContacto = HashMap<String, Any>()
+        newContacto["Userid"] = contacto.Userid
+        newContacto["Numero"] = contacto.Numero
+        newContacto["Nombre"] = contacto.Nombre
+        contactoDBRef.add(newContacto)
+            .addOnCompleteListener{
+                requireActivity().toast("Añadido")
+            }
+            .addOnFailureListener{
+                requireActivity().toast("Error")
+            }
+    }
+
+    private fun saveContactoLl(contacto: Contacto){
+        val newContacto = HashMap<String, Any>()
+        newContacto["Userid"] = contacto.Userid
+        newContacto["Numero"] = contacto.Numero
+        newContacto["Nombre"] = contacto.Nombre
+        contactoDBRef2.add(newContacto)
+            .addOnCompleteListener{
+                requireActivity().toast("Añadido")
+            }
+            .addOnFailureListener{
+                requireActivity().toast("Error")
+            }
     }
 
     private fun getPhone(contactUri: Uri): String? {

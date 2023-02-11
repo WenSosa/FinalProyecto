@@ -20,11 +20,11 @@
         <activity
             android:name=".CuidadorActivity"
             android:exported="false" />
+
         <activity
-            android:name=".GraficosActivity"
-            android:exported="false"
-            android:label="@string/title_activity_graficos"
-            android:theme="@style/Theme.FinalProyectoTT.NoActionBar" />
+            android:name=".activities.GraficoNivelesActivity"
+            android:exported="false" />
+
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false" />

@@ -1,5 +1,7 @@
 package com.andrea.finalproyectott.fragments
 
+import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,10 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.andrea.finalproyectott.MainActivity
 import com.andrea.finalproyectott.R
+import com.andrea.finalproyectott.activities.GraficoNivelesActivity
 import com.andrea.finalproyectott.adapters.NivelesGlucosaAdapter
 import com.andrea.finalproyectott.databinding.FragmentInsulinaBinding
 import com.andrea.finalproyectott.databinding.FragmentNivelesBinding
+import com.andrea.finalproyectott.goToActivity
 import com.andrea.finalproyectott.models.NivelGlucosa
 import com.andrea.finalproyectott.toast
 import com.google.firebase.auth.FirebaseAuth
@@ -48,7 +53,9 @@ class NivelesFragment : Fragment() {
 
         setUpReciclerView()
         setUpNvBtn()
+        setUpNvBtnGrp()
         subscribeToNiveles()
+
 
         return view
     }
@@ -80,6 +87,14 @@ class NivelesFragment : Fragment() {
             }else{
                 requireActivity().toast("Vacio")
             }
+        }
+    }
+
+    private fun setUpNvBtnGrp(){
+        binding.botonVerGraficaNiveles.setOnClickListener(){
+
+            val intent = Intent(activity, GraficoNivelesActivity::class.java)
+            activity?.startActivity(intent)
         }
     }
 

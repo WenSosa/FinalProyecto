@@ -30,20 +30,10 @@ class ProfileDialog : DialogFragment() {
         entry =  view.findViewById(R.id.editTextName);
 
         return AlertDialog.Builder(context!!)
-            .setTitle(getString(R.string.dialog_title))
+            .setTitle("Recomendación del día")
+            .setMessage("Hola")
             .setView(view)
-            .setPositiveButton(getString(R.string.dialog_ok)){_,_->
-                val textName = binding.editTextName.text.toString()
-                val textApellido = binding.editTextApellidos.text.toString()
-                val textEdad = binding.editTextEdad.text.toString()
-                val textAltura = binding.editTextAltura.text.toString()
-                val textPeso = binding.editTextPeso.text.toString()
-                val userID = FirebaseAuth.getInstance().currentUser!!.uid
-                //val profile = Profile(textName, textApellido, textEdad, textAltura, textPeso,userID)
-                Log.d("ALO", textName +","+ textApellido+","+ textEdad+","+ textAltura+","+ textPeso+","+userID)
-                //RxBus.publish(NewProfileEvent(profile))
-            }
-            .setNegativeButton(R.string.dialog_cancel){_,_->
+            .setNegativeButton("Cerrar"){_,_->
                 requireActivity().toast("Cancelado")
             }
             .create()

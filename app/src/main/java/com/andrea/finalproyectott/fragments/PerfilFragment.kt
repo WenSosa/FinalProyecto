@@ -1,29 +1,32 @@
 package com.andrea.finalproyectott.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.andrea.finalproyectott.R
 import com.andrea.finalproyectott.utils.RxBus
 import com.andrea.finalproyectott.adapters.ProfileAdapter
 import com.andrea.finalproyectott.databinding.FragmentPerfilBinding
-import com.andrea.finalproyectott.dialogues.ProfileDialog
 import com.andrea.finalproyectott.models.NewProfileEvent
 import com.andrea.finalproyectott.models.Profile
+import com.andrea.finalproyectott.models.Sugerencias
 import com.andrea.finalproyectott.toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import io.reactivex.disposables.Disposable
 import java.util.EventListener
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.math.log
 
 class PerfilFragment : Fragment() {
 
@@ -41,6 +44,8 @@ class PerfilFragment : Fragment() {
     private var profileSubscription: ListenerRegistration? = null
     private lateinit var profileBusListener :  Disposable //No se que le movi xD
 
+    private lateinit var mensaje :String
+
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
 
@@ -56,10 +61,10 @@ class PerfilFragment : Fragment() {
         setUpCurrentUser()
 
         setUpReciclerView()
-        //setUpProfileButton()
 
         subscribeToProfiles()
         subscribeToNewProfiles()
+        inicializarContacto(view)
         return view
     }
 
@@ -81,12 +86,6 @@ class PerfilFragment : Fragment() {
         binding.recyclerViewProfile.adapter =adapter
     }
 
-
-    /*fun setUpProfileButton(){
-        binding.editProfile.setOnClickListener{ProfileDialog().show(
-            fragmentManager!!,"")}
-    }*/
-
     private fun saveProfile(profile: Profile){
         val newProfile = HashMap<String, Any>()
         newProfile["Nombre"] =profile.Nombre
@@ -103,6 +102,50 @@ class PerfilFragment : Fragment() {
             .addOnFailureListener{
                 requireActivity().toast("Error, intenta de nuevo")
             }
+    }
+
+    private fun inicializarContacto(view: View) {
+        val db = Firebase.firestore
+
+        val docRef = db.collection("Sugerencias")
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val lista: ArrayList<Sugerencias> = ArrayList()
+                    val sugerencia = document.toObjects(Sugerencias::class.java)
+                    lista.addAll(sugerencia)
+                    if (lista.size > 0) {
+                        val rnds = (0..lista.size).random()
+                        Log.d("ALO", "a: "+lista[rnds].Mensaje)
+                        basicAlert(view,lista[rnds].Mensaje)
+                    } else {
+                        Log.d("ALO", "No such document")
+                    }
+                } else {
+                    Log.d("ALO", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALO", "get failed with ", exception)
+            }
+    }
+    val positiveButtonClick = { dialog: DialogInterface, which: Int ->
+
+    }
+
+    fun basicAlert(view: View, mensaje: String){
+
+        val builder = AlertDialog.Builder(view.context)
+
+        with(builder)
+        {
+            setTitle("Recomendaciones")
+            setMessage(mensaje)
+            setPositiveButton("OK", DialogInterface.OnClickListener(function = positiveButtonClick))
+            show()
+        }
+
+
     }
 
     private fun subscribeToProfiles(){

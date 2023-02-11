@@ -65,7 +65,7 @@ class NocturnoFragment : Fragment() {
             val Temp= binding.editTextTemp.text.toString().toInt()
             val Hum= binding.editTextHumedad.text.toString().toInt()
 
-            if(Temp>=50 && Hum>=50){
+            if(Temp>=35 && Hum>=30){
                 getActivity()?.toast("Entra")
                 startCall()
                 sendSMS()

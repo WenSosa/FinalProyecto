@@ -9,6 +9,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ import com.andrea.finalproyectott.databinding.FragmentAlertarBinding
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AlertarFragment : Fragment() {
 
-    private lateinit var _view : View
+
     var CODE = 0
     val REQUEST_READ_CONTACTS = 3
     val PICK_CONTACT_REQUEST = 4
@@ -41,7 +42,6 @@ class AlertarFragment : Fragment() {
 
         return view
     }
-
 
     private fun setUpMensajeBtn() {
         binding.imageViewEditar2.setOnClickListener(){
@@ -81,11 +81,12 @@ class AlertarFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PICK_CONTACT_REQUEST){
-            if(resultCode == RESULT_OK) {
-                val contactUri: Uri? = data!!.data
+        if(resultCode == RESULT_OK) {
+            if (requestCode == PICK_CONTACT_REQUEST){
+                val contactUri = data!!.data
                 if (contactUri != null) {
                     renderContact(contactUri)
+
                 }
             }
         }
@@ -96,14 +97,16 @@ class AlertarFragment : Fragment() {
             binding.textViewNombreMensaje.text = getName(contactUri)
             binding.textViewNumero2.text = getPhone(contactUri)
             //Aqui guardamos las Shared Preferences
-            preferences.nombreMensaje = getName(contactUri) as String
-            preferences.numeroMensaje = getPhone(contactUri) as String
+            //preferences.nombreMensaje = getName(contactUri) as String
+            //preferences.numeroMensaje = getPhone(contactUri) as String
         }else if (CODE==2){
+            Log.d("HELP","Muere5-2")
             binding.textViewNombreLlamada.text = getName(contactUri)
+            Log.d("HELP","Muere5-3")
             binding.textViewNumero.text = getPhone(contactUri)
             //Aqui guardamos las Shared Preferences
-            preferences.nombreLlamada = getName(contactUri) as String
-            preferences.numeroLlamada = getPhone(contactUri) as String
+            //preferences.nombreLlamada = getName(contactUri) as String
+            //preferences.numeroLlamada = getPhone(contactUri) as String
         }
     }
 
@@ -111,7 +114,7 @@ class AlertarFragment : Fragment() {
         var id: String? = null
         var phone: String? = null
 
-        val contactCursor: Cursor = requireActivity().getContentResolver().query(
+        val contactCursor: Cursor = requireActivity().contentResolver.query(
             contactUri, arrayOf(ContactsContract.Contacts._ID),
             null, null, null
         )!!
@@ -125,7 +128,7 @@ class AlertarFragment : Fragment() {
                 ContactsContract.CommonDataKinds.Phone.TYPE + "= " +
                 ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE
 
-        val phoneCursor: Cursor = requireActivity().getContentResolver().query(
+        val phoneCursor: Cursor = requireActivity().contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI, arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
             selectionArgs, arrayOf(id),
             null
@@ -140,7 +143,7 @@ class AlertarFragment : Fragment() {
 
     private fun getName(contactUri: Uri): CharSequence? {
         var name: String? = null
-        val contentResolver: ContentResolver = requireActivity().getContentResolver()
+        val contentResolver: ContentResolver = requireActivity().contentResolver
         val c: Cursor = contentResolver.query(
             contactUri, arrayOf(ContactsContract.Contacts.DISPLAY_NAME), null, null, null
         )!!

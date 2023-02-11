@@ -120,6 +120,8 @@ class AlertarFragment : Fragment() {
             }
     }
 
+
+
     fun setUpInsulinaDB(){
         contactoDBRef =store.collection("Contacto-Llamada")
         contactoDBRef2 =store.collection("Contacto-Mensaje")

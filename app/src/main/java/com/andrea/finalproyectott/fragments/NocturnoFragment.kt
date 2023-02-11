@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.telephony.SmsManager
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +15,30 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.andrea.finalproyectott.R
 import com.andrea.finalproyectott.databinding.FragmentNocturnoBinding
+import com.andrea.finalproyectott.models.Contacto
 import com.andrea.finalproyectott.toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class NocturnoFragment : Fragment() {
 
     private lateinit var _view: View
-    val numero_telefono= "5516451399"
+    lateinit var numero_telefonoM : String
+    lateinit var numero_telefonoLl : String
     val REQUEST_PHONE_CALL = 1
     val REQUEST_SEND_SMS = 2
+
+    private val store : FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    private lateinit var contactoDBRef: CollectionReference
+    private lateinit var contactoDBRef2: CollectionReference
+
+    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var currentUser: FirebaseUser
 
     private var _binding: FragmentNocturnoBinding? = null
     private val binding get() = _binding!!
@@ -34,9 +51,12 @@ class NocturnoFragment : Fragment() {
         _binding = FragmentNocturnoBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        setUpInsulinaDB()
+        setUpCurrentUser()
         setUpLlamadaBtn()
         setUpSMSBtn()
         setUpTempHumBtn()
+        inicializarContacto()
         return view
     }
 
@@ -53,6 +73,70 @@ class NocturnoFragment : Fragment() {
                 getActivity()?.toast("No entra")
             }
         }
+    }
+    fun setUpInsulinaDB(){
+        contactoDBRef =store.collection("Contacto-Llamada")
+        contactoDBRef2 =store.collection("Contacto-Mensaje")
+    }
+
+    fun setUpCurrentUser(){
+        currentUser = mAuth.currentUser!!
+    }
+
+    private fun inicializarContacto() {
+        val db = Firebase.firestore
+
+        val docRef = db.collection("Contacto-Mensaje").whereEqualTo("Userid",currentUser.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val contactoM = document.toObjects(Contacto::class.java)
+                    listacontacto.addAll(contactoM)
+                    if (listacontacto.size > 0){
+
+                        numero_telefonoM = listacontacto[0].Numero
+
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+
+                    }else{
+                        Log.d("ALO", "No such document")
+                        numero_telefonoM = ""
+                    }
+                } else {
+                    Log.d("ALO", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALO", "get failed with ", exception)
+            }
+
+        val docRef2 = db.collection("Contacto-Llamada").whereEqualTo("Userid",currentUser.uid)
+        docRef2.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val contactoM = document.toObjects(Contacto::class.java)
+                    listacontacto.addAll(contactoM)
+                    if (listacontacto.size > 0){
+
+                        numero_telefonoLl = listacontacto[0].Numero
+
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+
+                    }else{
+                        Log.d("ALO", "No such document")
+                        numero_telefonoLl = ""
+                    }
+                } else {
+                    Log.d("ALO", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALO", "get failed with ", exception)
+            }
     }
 
     fun setUpSMSBtn() {
@@ -84,16 +168,25 @@ class NocturnoFragment : Fragment() {
     }
 
     private fun startCall() {
-        val callIntent = Intent(Intent.ACTION_CALL)
-        callIntent.data = Uri.parse("tel:"+numero_telefono)
-        startActivity(callIntent)
+        Log.d("ALO",numero_telefonoLl)
+        if (numero_telefonoLl==""){
+            getActivity()?.toast("Numero de llamada no registrado")
+        }else{
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:"+numero_telefonoLl)
+            startActivity(callIntent)
+        }
+
     }
 
     private fun sendSMS() {
-        val Number = "5516451399"
-        val text = "Mestoymuriendo vengan por mi"
-        SmsManager.getDefault().sendTextMessage(Number,null,text,null,null)
-        getActivity()?.toast("Mensaje de texto enviado")
+        if (numero_telefonoLl==""){
+            getActivity()?.toast("Numero de mensaje no registrado")
+        }else {
+            val text = "Mestoymuriendo vengan por mi"
+            SmsManager.getDefault().sendTextMessage(numero_telefonoM, null, text, null, null)
+            getActivity()?.toast("Mensaje de texto enviado")
+        }
     }
 
 

@@ -58,7 +58,7 @@ class CuidadorActivity : ToolbarActivity() , NavigationView.OnNavigationItemSele
             R.id.nav_medicamento->fragmentTransaction(MedicamentoCuidador())
             R.id.nav_alimentos->fragmentTransaction(AlimenticiaFragment())
             R.id.nav_recordatorios->fragmentTransaction(RecordatoriosCuidadorFragment())
-            R.id.nav_profile->fragmentTransaction(DatosPerfil())
+            //R.id.nav_profile->fragmentTransaction(DatosPerfil())
         }
     }
     private fun setUserHeaderInformation() {

@@ -54,7 +54,7 @@ class AlertarFragment : Fragment() {
         _binding = FragmentAlertarBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        setUpInsulinaDB()
+        setUpContactoDB()
         setUpCurrentUser()
         inicializarContacto()
 
@@ -71,16 +71,16 @@ class AlertarFragment : Fragment() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val listacontactoM : ArrayList<Contacto> = ArrayList()
                     val contactoM = document.toObjects(Contacto::class.java)
-                    listacontacto.addAll(contactoM)
-                    if (listacontacto.size > 0){
+                    listacontactoM.addAll(contactoM)
+                    if (listacontactoM.size > 0){
 
-                        binding.textViewNombreMensaje.text = listacontacto[0].Nombre
-                        binding.textViewNumero2.text = listacontacto[0].Numero
+                        binding.textViewNombreMensaje.text = listacontactoM[listacontactoM.size-1].Nombre
+                        binding.textViewNumero2.text = listacontactoM[listacontactoM.size-1].Numero
 
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontactoM[0].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontactoM[0].Numero}")
 
                     }else{
                         Log.d("ALO", "No such document")
@@ -97,16 +97,16 @@ class AlertarFragment : Fragment() {
         docRef2.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val listacontacto : ArrayList<Contacto> = ArrayList()
-                    val contactoM = document.toObjects(Contacto::class.java)
-                    listacontacto.addAll(contactoM)
-                    if (listacontacto.size > 0){
+                    val listacontactoLl : ArrayList<Contacto> = ArrayList()
+                    val contactoLl = document.toObjects(Contacto::class.java)
+                    listacontactoLl.addAll(contactoLl)
+                    if (listacontactoLl.size > 0){
 
-                        binding.textViewNombreLlamada.text = listacontacto[0].Nombre
-                        binding.textViewNumero.text = listacontacto[0].Numero
+                        binding.textViewNombreLlamada.text = listacontactoLl[0].Nombre
+                        binding.textViewNumero.text = listacontactoLl[0].Numero
 
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontactoLl[listacontactoLl.size-1].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontactoLl[listacontactoLl.size-1].Numero}")
 
                     }else{
                         Log.d("ALO", "No such document")
@@ -122,7 +122,7 @@ class AlertarFragment : Fragment() {
 
 
 
-    fun setUpInsulinaDB(){
+    fun setUpContactoDB(){
         contactoDBRef =store.collection("Contacto-Llamada")
         contactoDBRef2 =store.collection("Contacto-Mensaje")
     }
@@ -199,7 +199,7 @@ class AlertarFragment : Fragment() {
         newContacto["Userid"] = contacto.Userid
         newContacto["Numero"] = contacto.Numero
         newContacto["Nombre"] = contacto.Nombre
-        contactoDBRef.add(newContacto)
+        contactoDBRef2.add(newContacto)
             .addOnCompleteListener{
                 requireActivity().toast("Añadido")
             }
@@ -213,7 +213,7 @@ class AlertarFragment : Fragment() {
         newContacto["Userid"] = contacto.Userid
         newContacto["Numero"] = contacto.Numero
         newContacto["Nombre"] = contacto.Nombre
-        contactoDBRef2.add(newContacto)
+        contactoDBRef.add(newContacto)
             .addOnCompleteListener{
                 requireActivity().toast("Añadido")
             }

@@ -90,15 +90,12 @@ class NocturnoFragment : Fragment() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val listacontactoM : ArrayList<Contacto> = ArrayList()
                     val contactoM = document.toObjects(Contacto::class.java)
-                    listacontacto.addAll(contactoM)
-                    if (listacontacto.size > 0){
+                    listacontactoM.addAll(contactoM)
+                    if (listacontactoM.size > 0){
 
-                        numero_telefonoM = listacontacto[0].Numero
-
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+                        numero_telefonoM = listacontactoM[listacontactoM.size-1].Numero
 
                     }else{
                         Log.d("ALO", "No such document")
@@ -116,15 +113,12 @@ class NocturnoFragment : Fragment() {
         docRef2.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val listacontactoLl : ArrayList<Contacto> = ArrayList()
                     val contactoM = document.toObjects(Contacto::class.java)
-                    listacontacto.addAll(contactoM)
-                    if (listacontacto.size > 0){
+                    listacontactoLl.addAll(contactoM)
+                    if (listacontactoLl.size > 0){
 
-                        numero_telefonoLl = listacontacto[0].Numero
-
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
-                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+                        numero_telefonoLl = listacontactoLl[listacontactoLl.size-1].Numero
 
                     }else{
                         Log.d("ALO", "No such document")
@@ -168,7 +162,6 @@ class NocturnoFragment : Fragment() {
     }
 
     private fun startCall() {
-        Log.d("ALO",numero_telefonoLl)
         if (numero_telefonoLl==""){
             getActivity()?.toast("Numero de llamada no registrado")
         }else{
@@ -180,10 +173,10 @@ class NocturnoFragment : Fragment() {
     }
 
     private fun sendSMS() {
-        if (numero_telefonoLl==""){
+        if (numero_telefonoM==""){
             getActivity()?.toast("Numero de mensaje no registrado")
         }else {
-            val text = "Mestoymuriendo vengan por mi"
+            val text = "Prueba: este es un mensaje de Alerta sobre tu contacto Paciente"
             SmsManager.getDefault().sendTextMessage(numero_telefonoM, null, text, null, null)
             getActivity()?.toast("Mensaje de texto enviado")
         }

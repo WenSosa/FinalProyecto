@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class AlertarFragment : Fragment() {
@@ -54,11 +56,68 @@ class AlertarFragment : Fragment() {
 
         setUpInsulinaDB()
         setUpCurrentUser()
+        inicializarContacto()
 
         setUpLlamadaBtn()
         setUpMensajeBtn()
 
         return view
+    }
+
+    private fun inicializarContacto() {
+        val db = Firebase.firestore
+
+        val docRef = db.collection("Contacto-Mensaje").whereEqualTo("Userid",currentUser.uid)
+        docRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val contactoM = document.toObjects(Contacto::class.java)
+                    listacontacto.addAll(contactoM)
+                    if (listacontacto.size > 0){
+
+                        binding.textViewNombreMensaje.text = listacontacto[0].Nombre
+                        binding.textViewNumero2.text = listacontacto[0].Numero
+
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+
+                    }else{
+                        Log.d("ALO", "No such document")
+                    }
+                } else {
+                    Log.d("ALO", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALO", "get failed with ", exception)
+            }
+
+        val docRef2 = db.collection("Contacto-Llamada").whereEqualTo("Userid",currentUser.uid)
+        docRef2.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val listacontacto : ArrayList<Contacto> = ArrayList()
+                    val contactoM = document.toObjects(Contacto::class.java)
+                    listacontacto.addAll(contactoM)
+                    if (listacontacto.size > 0){
+
+                        binding.textViewNombreLlamada.text = listacontacto[0].Nombre
+                        binding.textViewNumero.text = listacontacto[0].Numero
+
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Nombre}")
+                        Log.d("ALO", "DocumentSnapshot data: ${listacontacto[0].Numero}")
+
+                    }else{
+                        Log.d("ALO", "No such document")
+                    }
+                } else {
+                    Log.d("ALO", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("ALO", "get failed with ", exception)
+            }
     }
 
     fun setUpInsulinaDB(){

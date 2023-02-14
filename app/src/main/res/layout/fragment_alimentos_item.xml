@@ -52,6 +52,20 @@
                 card_view:layout_constraintStart_toEndOf="@+id/textViewCalorias"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/iconoAdd"
+                android:layout_width="30dp"
+                android:layout_height="29dp"
+                android:contentDescription="@string/mgdl_label"
+                android:src="@drawable/ic_plus"
+                card_view:layout_constraintBottom_toBottomOf="parent"
+                card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.483"
+                card_view:layout_constraintStart_toEndOf="@+id/textViewLabelCal"
+                card_view:layout_constraintTop_toTopOf="parent"
+                card_view:layout_constraintVertical_bias="0.692" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

@@ -22,7 +22,6 @@ import kotlin.collections.HashMap
 
 class Medicamento : Fragment()  {
 
-    lateinit var _view: View
 
     private val store : FirebaseFirestore = FirebaseFirestore.getInstance()
     private lateinit var medicamentoDBRef: CollectionReference

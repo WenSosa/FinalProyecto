@@ -54,6 +54,7 @@ class AlimenticiaFragment : Fragment() {
 
         binding.button.setOnClickListener(){
             binding.button.setText("Calorias = 0")
+            suma=0
         }
 
         return view
@@ -108,13 +109,11 @@ class AlimenticiaFragment : Fragment() {
     }
 
     private fun subscribeToAlimentos(){
-        //val query = profileDBRef.whereEqualTo("userID", currentUser.uid)
 
         alimentosSubscription = alimentosDBRef
             .addSnapshotListener(object : EventListener, com.google.firebase.firestore.EventListener<QuerySnapshot> {
                 override fun onEvent(snapshot: QuerySnapshot?, exception: FirebaseFirestoreException?) {
                     exception?.let {
-                        //activity!!.toast(exception.message.toString())
                         return
                     }
 

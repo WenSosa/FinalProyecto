@@ -30,7 +30,6 @@ import kotlin.collections.HashMap
 
 class PerfilFragment : Fragment() {
 
-    private lateinit var _view : View
 
     private lateinit var adapter : ProfileAdapter
     private val profileList : ArrayList<Profile> = ArrayList()
@@ -115,7 +114,7 @@ class PerfilFragment : Fragment() {
                     val sugerencia = document.toObjects(Sugerencias::class.java)
                     lista.addAll(sugerencia)
                     if (lista.size > 0) {
-                        val rnds = (0..lista.size).random()
+                        val rnds = (0..lista.size-1).random()
                         Log.d("ALO", "a: "+lista[rnds].Mensaje)
                         basicAlert(view,lista[rnds].Mensaje)
                     } else {
